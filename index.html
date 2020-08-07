@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css">
+    <title>test creation</title>
+</head>
+
+<body>
+    <section class="section">
+        <div class="main-wrapper">
+            <h1>TODO LIST</h1>
+
+            <div id="app">
+                <input type="text" v-model="inputText" placeholder="input task here">
+                <button @click="addtask()">add</button>
+                <button @click="clear()">clear</button>
+                <!--入力欄ブランクでタスク追加された場合のバリデーション-->
+                <p v-if="errmsg" :class="{errMsg: errmsg}">please input something...</p>
+                <div>
+                    <button @click="trashtask()">trash all items already done</button>
+                </div>
+
+                <div class="task-list-area">
+                    <ul class="task-list">
+                        <!--タスクを一個ずつ描画-->
+                        <li v-for="(item,index) in items">
+                            <label>
+                                <input type="checkbox" v-model="item.isDone">
+                                <span v-bind:class="{done: item.isDone}">{{ index }} {{ item.title }}</span>
+                            </label>
+                            <i class="fas fa-trash" @click="deletetask(index)"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="./index.js"></script>
+
+</body>
+
+</html>
